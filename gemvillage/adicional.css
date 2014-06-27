@@ -1,0 +1,67 @@
+body{font-family:Arial, "Helvetica", sans-serif;}
+td { padding: 2px 5px 5px  !important;}
+table.tablemaster {font-size:14px;}
+table.tablemaster_"" {font-size:14px;}
+table { font-size: 14px;}
+a:visited{ color: #dc6800; }
+.td_iconos{text-align:center;}
+.td_iconos > img.icono_seleccionar {height: 30px;width: 30px;} 
+.filtros_busqueda{display:inline; font-size:12px;}
+.filtro_busqueda{}
+.title-amortizacion{width:90%;display:block;text-align: center;margin-left:5%;margin-right:5%;}
+.title-amortizacion h3{background: #f4f4f4;border: 1px solid #ccc;border-radius: 5px 5px 5px 5px;color: #dc6800;font-weight: bold;margin: 32px 0 0;padding: 7px 10px 10px 20px; font-size:14px; text-transform:uppercase;}
+.error-txt{ background:#FFE18D url(error.png) no-repeat;border: 1px solid #EFBA0C;border-radius: 5px 5px 5px 5px;color: red;font-weight: bold;padding: 7px 10px 10px 20px; max-width:55%;margin:32px 0 0 0;}
+.ok-txt {background: url("ok.png") no-repeat scroll 0 0 #e3e89a;border: 1px solid #77a400;border-radius: 5px 5px 5px 5px;color: #607f00;font-weight: bold;max-width: 55%;padding: 7px 10px 10px 20px;margin:32px 0 0 0 !important; }
+.cart-txt {background: none repeat scroll 0 0 #F4F4F4;border: 1px solid #CCCCCC;border-radius: 5px 5px 5px 5px;color: #DC6800;font-size: 16px;font-weight: bold;margin: 32px 0 0;padding: 7px 10px 10px 20px;text-transform: uppercase;}
+.wrapper {width: 96%;margin: 0 auto;}
+.multimedia{margin-top:20px;}
+.wrapper-content{
+width:100%;text-align:center;
+   min-height:100%;
+   position:relative;
+   padding-bottom:70px;   /* Height of the footer */
+   }
+.wrapper-menu{}
+.wrapper-header {height: 80px;position:relative;width:100%;}
+.wrapper-iframe{float:right;height:100%;width:85%;margin-left: 200px;margin-top: 10px;position: absolute;
+   min-height:100%;
+   position:relative;
+   padding-bottom:70px;   /* Height of the footer */
+
+}
+table.tablemaster tr img, table.tablemaster td img{max-height: 50px !important;max-width: 50px !important;}
+table.tablemaster_2 tr img, table.tablemaster_2 td img{max-height: 50px !important;max-width: 50px !important;}
+.img_td {text-align:center !important;}
+.acciones2 .cuadro2 li{padding:10px;color:#ff9900;font-weight:bold;}
+.acciones2 .cuadro2 li:hover {background:#f9f9f9;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+th a.headerlink > img {}
+#titulo > img {width: 70px;}
+#tablemaster_mediaviewer img {height: 100px !important;width: 100px !important;  }
+.ext-img {font-size:12px; }
+.ext-img a, .btn, button, #m2 > input{margin:10px 10px 0; font-size:12px;background: none repeat scroll 0 0 #FF9900;border: 1px solid #DC6800;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;color: #FFFFFF  !important;padding: 3px 7px;}
+.ext-img a:hover, .btn:hover, button:hover, #m2 > input:hover{background: none repeat scroll 0 0 #dc6800;}
+.m.m1 tr:hover{background:#fff;}
+select {background: #FFFFFF;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+input, textarea, #tableelement_1 input{-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+.float-l{float:left;}
+.float-r{float:right;}
+#explorador_menu img {margin: 20px 0 0;width: 120px;}
+#nav a {font-size: 14px;font-weight: bold;}  
+.editable_field input[type="text"],select {width: 100%;}
+.editable_field textarea {width: 100%;}
+.editable_field {}
+.venta-rest{ width:15%;margin:30px auto 0; padding:10px;border: 1px solid #CCCCCC;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px; background: none repeat scroll 0 0 #F4F4F4;}
+.venta-tot{  font-weight: normal;color: #666;}
+table.venta-tot td a#total, table.venta-tot td a#subtotal{font-weight:bold;}
+table.tablemaster caption {color:#dc6800;font-weight: bold;padding: 5px;text-align: center;}
+table.tablemaster_2 caption {color:#dc6800;font-weight: bold;padding: 5px;text-align: center;}
+#copy {
+	position: relative;
+	margin-top: -20px; /* altura en px del footer con valor negativo */
+	height: 20px; /* Altura del Footer en px*/
+	clear: both;text-align: center;
+	color: #666666;
+	font-size: 70%;
+	margin-top: -20px;
+	padding: 50px 0 0;
+}
