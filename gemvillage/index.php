@@ -2,7 +2,7 @@
 @session_start();
 ?><html>
 <head>
-<title>Amortización</title>
+<title>Index</title>
 <?php
 require_once('framework-master.php');
 require_once('db.php');

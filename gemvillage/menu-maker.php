@@ -1,4 +1,26 @@
 <?php
+function check_tipo_usuario(){
+	if (isset($_SESSION['id_usuario'])){
+		$server="localhost";
+		$database="Minpv09876";
+		$user="root";
+		$password="Loscocos123";
+		$id_usuario = $_SESSION['id_usuario'];
+		mysql_connect($server,$user,$password);
+		@mysql_select_db($database) or die("Error eligiendo database");
+		$query="SELECT tipo_usuario FROM usuarios WHERE id = '$id_usuario' LIMIT 1";
+		$result=mysql_query($query);
+		if ($usuario=mysql_fetch_array($result)){
+			$tipo_usuario = $usuario['tipo_usuario'];
+		} else {
+			session_destroy();
+			header( 'Location: login.php');
+		}
+		return $tipo_usuario;
+	}
+	return false;
+}
+
 	function menu_header(){
 ?>
 		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset/reset-min.css">
@@ -77,7 +99,14 @@ function menu_start(){
 					<li><a class="radiustop radiusbottom" href="tabla_socio.php">Administrar socios</a></li>			
 				</ul>
 			</li>
-			<li><a href="usuarios.php">USUARIOS</a> 
+			<?php
+			$tipo_usuario = check_tipo_usuario();
+			if($tipo_usuario == 1) {
+				?>
+				<li><a href="usuarios.php">USUARIOS</a>
+				<?php 
+			} 
+			?> 
 			<li><a href="javascript:void(0);">CLIENTES</a>
 				<ul>
 					<li><a class="radiustop" href="tabla_cliente.php">Administrar clientes</a></li>

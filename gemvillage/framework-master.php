@@ -1380,7 +1380,7 @@ class master{
 				if($valor["tipo"]=='db')
 					$_POST[$name]=$valor['default'];
 				if($valor["tipo"]=='password')
-					$_POST[$name]=md5($this->semilla.$_POST[$name]);
+					$_POST[$name]=crypt($_POST[$name], '$2a$10$1qAz2wSx3eDc4rFv5tGb5t');
 				if(!isset($_POST[$name]) && $imgexistente==0 && ($valor["tipo"] != "archivo" || !isset($_FILES[$name]['tmp_name']))){
 					if((isset($valor['opcional']) && $valor['opcional']==true) || (isset($valor['editable']) && $valor['editable']==false)){
 						$_POST[$name]="";
