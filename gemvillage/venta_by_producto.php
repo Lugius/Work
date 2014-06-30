@@ -1,19 +1,19 @@
  <?php
 @session_start();
 ob_start();
+require_once('framework-master.php');
+require_once('db.php');
+require_once("menu-maker.php");
 //define('DEBUG',1);
 ?><html>
 <head>
 <title>Productos vendidos</title>
 <?php
-require_once('framework-master.php');
-require_once('db.php');
 $core= new master($server,$database,$user,$password);
 $core->set_upload_dir("./images");
 $core->semilla="xianur0";
 $adicional_condicion="";
 echo $core->header();
-require_once("menu-maker.php");
 menu_header();
 $by=(isset($_GET['desc']) ? 'asc' : "desc");
 $iconoby=(isset($_GET['desc']) ? '<img style="width:3px;" src="down.png">' : ((isset($_GET['asc'])) ? '<img style="width:3px;" src="up.png">' : ''));
@@ -36,7 +36,7 @@ function display_productos(id) {
 </header>
 <body>
 <?php
-menu_start();
+menu_start($tipo_usuario);
 ?>
 <div id="dialog"><img src="" style="width:100%;" id="imagen-display"/><iframe src="" style="width:100%;height:100%;display:none;" id="iframe-display"></iframe></div><center>
 <div style="width:100%;" class="m" id="m2"><table style="width:100%" id="tablemaster_productos" class="tablemaster">

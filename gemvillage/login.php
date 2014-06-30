@@ -18,13 +18,13 @@ menu_header();
 ?>
 </head>
 <body>
-<?php menu_start(); ?>
+<?php menu_start($tipo_usuario); ?>
 <br/><br/>
 <h1>Iniciar sesión</h1>
 <?php 
-session_destroy();
 	if(isset($_SESSION['id_usuario'])){
 		echo "<h2>La sesión ya esta iniciada</h2>";
+		echo "<form action=\"panel_control.php\"><p><input type=\"submit\" value=\"Ok\"/></p></form></h1>";
 	} else {
 ?>
 <form action="login_submit.php" method="post">
@@ -35,7 +35,7 @@ session_destroy();
 		</p>
 		<p>
 			<label for="pwd">Contraseña</label><br/>
-			<input type="text" id="pwd" name="pwd" value="" maxlength="220" />
+			<input type="password" id="pwd" name="pwd" value="" maxlength="220" />
 		</p>
 		<p>
 			<input type="hidden" name="form_token" value="<?php echo $form_token; ?>" />

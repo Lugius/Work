@@ -1,13 +1,13 @@
 <?php
-function check_tipo_usuario(){
+$tipo_usuario = check_tipo_usuario($server, $database, $user, $password);
+if ($tipo_usuario != 1 && $tipo_usuario != 2){
+	header( 'Location: index.php' );
+}
+function check_tipo_usuario($server,$database,$user,$password){
 	if (isset($_SESSION['id_usuario'])){
-		$server="localhost";
-		$database="Minpv09876";
-		$user="root";
-		$password="Loscocos123";
 		$id_usuario = $_SESSION['id_usuario'];
 		mysql_connect($server,$user,$password);
-		@mysql_select_db($database) or die("Error eligiendo database");
+		@mysql_select_db($database) or die("Error eligiendo base de datos");
 		$query="SELECT tipo_usuario FROM usuarios WHERE id = '$id_usuario' LIMIT 1";
 		$result=mysql_query($query);
 		if ($usuario=mysql_fetch_array($result)){
@@ -53,14 +53,25 @@ function check_tipo_usuario(){
                </script>
 <?php
 }
-function menu_start(){
+function menu_start($tipo_usuario){
 ?>
 
 <div class="wrapper" id="wrapper">
 <div class="wrapper-header" id="wrapper-header">
 	<div class="m" style="margin-bottom:2%;">
-	<a href="index.php"><img class="logo" src="logo.png" style="float:left;height:73px;margin-left:20px;"/></a>
-	<h1><div id="titulo" style="text-align:right;margin-right:2%;"></div></h1>
+		<a href="index.php"><img class="logo" src="logo.png" style="float:left;height:73px;margin-left:20px;"/></a>
+		<?php
+		if($tipo_usuario != 1 && $tipo_usuario != 2) {
+			?>
+			<a href="login.php"><p style="float:left;margin-left:20px;">Iniciar sesion</p></a>
+			<?php 
+		} else {
+			?> 
+			<a href="logout.php"><p style="float:left;margin-left:20px;">Cerrar sesión</p></a>
+			<?php
+		}
+		?>
+		<h1><div id="titulo" style="text-align:right;margin-right:2%;"></div></h1>
 	</div>
 </div>
 <div id="wrapper-menu">
@@ -100,7 +111,6 @@ function menu_start(){
 				</ul>
 			</li>
 			<?php
-			$tipo_usuario = check_tipo_usuario();
 			if($tipo_usuario == 1) {
 				?>
 				<li><a href="usuarios.php">USUARIOS</a>
@@ -152,3 +162,4 @@ Copyright &copy; Punto de Venta Kinui 2013. Todos los derechos Reservados.  Powe
 <?php
 }
 
+?>

@@ -1,23 +1,27 @@
 <?php
 @session_start();
+require_once('framework-master.php');
+require_once('db.php');
+require_once('menu-maker.php');
 ?><html>
 <head>
 <title>Usuarios</title>
 <?php
-require_once('framework-master.php');
-require_once('db.php');
 $core= new master($server,$database,$user,$password);
 $core->set_upload_dir("./images");
 $core->semilla="xianur0";
 echo $core->header();
-require_once('menu-maker.php');
 menu_header();
 ?>
 
 
 <script>
 	$(function(){
-		var $pass = $('#pwd'),
+		var $nombre = $('#nombre'),
+			$nombre_usuario = $('#nombre_usuario'),
+			$email = $('#email'),
+			$fecha = $('#fecha'),
+			$pass = $('#pwd'),
 			$confirm = $('#pwd_re'),
 			$submit = $('#wrapper-iframe form input[name="enviar"]');
 
@@ -27,6 +31,16 @@ menu_header();
 				alert('Las contraseñas no coinciden.');
 				return false;
 			} 
+			if ($nombre.val() == "" || 
+				$nombre_usuario.val() == "" || 
+				$email.val() == "" || 
+				$fecha.val() == "" || 
+				$pass.val() == "" ){
+				e.preventDefault();
+				alert('Porfavor, introduzca todos los campos');
+				return false;
+			}
+
 		});
 	})
 </script>
@@ -35,8 +49,7 @@ menu_header();
 </head>
 <body>
 <?php
-menu_start();
-$tipo_usuario = check_tipo_usuario();
+menu_start($tipo_usuario);
 if($tipo_usuario == 1){
 
 	$forms=array();
@@ -140,7 +153,7 @@ if($tipo_usuario == 1){
 	<br/><br/><br/>
 	<h1> Accesso restringido.</h1>
 	<h2> Esta pagina es solo para super-admins. </h2>
-	<form action="index.php"><p><input type="submit" value="Ok"/></p></form>
+	<form action="panel_control.php"><p><input type="submit" value="Ok"/></p></form>
 	<?php
 }
 menu_end();

@@ -1,14 +1,15 @@
 <?php
 @session_start();
 ob_start();
+require_once('framework-master.php');
+require_once('db.php');
+require_once('menu-maker.php');
 //define("DEBUG",1);
 ?><html>
 <head>
 <title>Lote</title>
 <?php
 unset($_SESSION['master_almacen']['id_table_lotes']);
-require_once('framework-master.php');
-require_once('db.php');
 $core= new master($server,$database,$user,$password);
 $core->set_upload_dir("./images");
 $core->semilla="xianur0";
@@ -23,7 +24,6 @@ if(isset($_POST['master_task']) && $_POST['master_task']=='eliminar_2'){
 	}
 }
 $data=$core->db_exect("select id,nombre,aumento from gastosadicionales;");
-require_once('menu-maker.php');
 menu_header();
 ?>
 <script>
@@ -382,7 +382,7 @@ $forms["lotes"]=array(
 );
 $core->mensajeguardado="<p class='ok-txt'>Lote guardado correctamente. <a href=\"tabla_productos.php?master_task=nuevo&lote={master-guardado}\">Dividir en productos.</a></p>";
 $core->createsqltable($forms);
-menu_start();
+menu_start($tipo_usuario);
 print $core->createtable(array(
 			"tabla"=>$forms,
 			"nuevo"=>array(

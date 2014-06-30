@@ -1,11 +1,12 @@
 <?php
 @session_start();
+require_once('framework-master.php');
+require_once('db.php');
+require_once('menu-maker.php');
 ?><html>
 <head>
 <title>Multimedia</title>
 <?php
-require_once('framework-master.php');
-require_once('db.php');
 $core= new master($server,$database,$user,$password);
 $core->set_upload_dir("./images");
 $core->semilla="xianur0";
@@ -14,7 +15,6 @@ $data=$core->db_exect("select id,nombre,aumento from gastosadicionales;");
 $selectmode=0;
 if(isset($_GET['seleccionar']))
 	$selectmode=1;
-require_once('menu-maker.php');
 if($selectmode!=1)
 	menu_header();
 ?>
@@ -40,7 +40,7 @@ var gastos=<?php echo $core->array2json($data);?>;
 <body>
 <?php
 if($selectmode!=1)
-	menu_start();
+	menu_start($tipo_usuario);
 $forms=array();
 $campos=array();
 $campos["filtro_elemento"]=array(

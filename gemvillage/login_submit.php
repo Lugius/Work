@@ -1,25 +1,7 @@
 <?php
-session_start();
-?>
-<html>
-<head>
-<?php
 require_once('framework-master.php');
 require_once('db.php');
-$core= new master($server,$database,$user,$password);
-$core->set_upload_dir("./images");
-$core->semilla="xianur0";
-echo $core->header();
-require_once('menu-maker.php');
-menu_header();
-
-
-?>
-<title>Members Only Page</title>
-</head>
-<body>
-<?php menu_start();?>
-<h1><br/><br/><?php 
+session_start();
 	if(isset($_SESSION['id_usuario'])){
 		$message = "Esta sesión ya esta iniciada.";
 		} else {
@@ -40,17 +22,38 @@ menu_header();
 				if (crypt($pwd, '$2a$10$1qAz2wSx3eDc4rFv5tGb5t') === $hash){
 					$_SESSION['id_usuario'] = $usuario['id'];
 					$nombre = $usuario['nombre'];
-					echo "<p align='center'>Sesión iniciada. Bienvenido, $nombre.<p>";
+					header( 'Location: panel_control.php' ) ;
 				} else {
-					$message = "Contraseña incorrecta";
+					$message = "El usuario no existe o la contraseña es incorrecta";
 				}
 			} else {
-				$message = "No se pudo iniciar sesión, $query";
+				$message = "El usuario no existe o la contraseña es incorrecta";
 			}
 			mysql_close();
 		} 
 	}
-?></h1>
+?>
+<html>
+<head>
+<?php
+$core= new master($server,$database,$user,$password);
+$core->set_upload_dir("./images");
+$core->semilla="xianur0";
+echo $core->header();
+require_once('menu-maker.php');
+menu_header();
+
+
+?>
+<title>Members Only Page</title>
+</head>
+<body>
+<?php menu_start($tipo_usuario);?>
+<h1><br/><br/>
+<?php 
+	echo $message;
+?>
+<form action="login.php"><p><input type="submit" value="Ok"/></p></form></h1>
 <?php menu_end();?>
 </body>
 </html>

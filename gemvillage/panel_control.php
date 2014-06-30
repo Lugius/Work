@@ -1,11 +1,12 @@
 <?php
 @session_start();
+require_once('framework-master.php');
+require_once('db.php');
+require_once('menu-maker.php');
 ?><html>
 <head>
 <title>Amortización</title>
 <?php
-require_once('framework-master.php');
-require_once('db.php');
 $core= new master($server,$database,$user,$password);
 $core->set_upload_dir("./images");
 $core->semilla="xianur0";
@@ -18,7 +19,6 @@ $matriz_fechas="";
 foreach($fechas_activas as $fecha_activa){
 	$matriz_fechas.="'".substr($fecha_activa['fecha'],0,8)."',";
 }
-require_once('menu-maker.php');
 menu_header();
 ?>
 </head>
@@ -71,7 +71,7 @@ return [0,""];
 	}
 </style>
 <?php
-menu_start();
+menu_start($tipo_usuario);
 ?>
 <div id="toolbar" class="toolbar" style="width:70%;margin-left:14%;">
 <div class="m m1">

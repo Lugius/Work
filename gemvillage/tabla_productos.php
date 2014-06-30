@@ -2,6 +2,9 @@
 @session_start();
 ob_start();
 //define('DEBUG',1);
+require_once('framework-master.php');
+require_once('db.php');
+require_once("menu-maker.php");
 ?><html>
 <head>
 <title>Productos</title>
@@ -9,8 +12,6 @@ ob_start();
 if(!defined("COMPRA")){
 	unset($_SESSION['master_almacen']['id_table_productos']);
 }
-require_once('framework-master.php');
-require_once('db.php');
 $cache_detalles_venta=array();
 $core= new master($server,$database,$user,$password);
 $core->set_upload_dir("./images");
@@ -134,7 +135,6 @@ if(isset($_POST['master_task']) && $_POST['master_task']=='eliminar_2'){
 		$core->db_exect("UPDATE productos set estado=1 where id='".$idc."';");
 	}
 }
-require_once("menu-maker.php");
 if($adicional_condicion=='')
 	menu_header();
 $loteseleccionado=0;
@@ -1124,7 +1124,7 @@ var lotes_db=<?php echo $core->array2json($data5);?>;
 <body>
 <?php
 if($adicional_condicion=='')
-	menu_start();
+	menu_start($tipo_usuario);
 if($errores_pendientes!=''){
 	$core->error($errores_pendientes);
 }

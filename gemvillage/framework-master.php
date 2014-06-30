@@ -1495,7 +1495,7 @@ class master{
 			if($this->status_error==1 || (isset($GLOBALS['status_error']) && $GLOBALS['status_error']==1) || ($update==0 && $values=='')){
 				return false;
 			} else if(!mysql_query($sql)){
-				$this->error("No se puede guardar los valores: ".mysql_error($this->db)." ".$sql);
+				$this->error("No se puede guardar los valores: ".mysql_error($this->db));
 				return;
 			}
 			if($update==0){

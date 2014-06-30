@@ -1,22 +1,22 @@
 <?php
 @session_start();
+require_once('framework-master.php');
+require_once('db.php');
+require_once('menu-maker.php');
 ?><html>
 <head>
 <title>Nuevo tipo de categoría</title>
 <?php
-require_once('framework-master.php');
-require_once('db.php');
 $core= new master($server,$database,$user,$password);
 $core->set_upload_dir("./images");
 $core->semilla="xianur0";
 echo $core->header();
-require_once('menu-maker.php');
 menu_header();
 ?>
 </head>
 <body>
 <?php
-menu_start();
+menu_start($tipo_usuario);
 $forms=array();
 $campos=array();
 $campos["nombre"]=array(
