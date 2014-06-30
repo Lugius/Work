@@ -41,19 +41,33 @@ $core->set_upload_dir("./images");
 $core->semilla="xianur0";
 echo $core->header();
 require_once('menu-maker.php');
-menu_header();
 
 
 ?>
-<title>Members Only Page</title>
+<title>Error al iniciar session</title>
 </head>
 <body>
-<?php menu_start($tipo_usuario);?>
-<h1><br/><br/>
+<div class="wrapper" id="wrapper">
+<div class="wrapper-header" id="wrapper-header">
+	<div style="margin-top:5%;margin-bottom:2%;">
+		<a href="index.php"><img class="logo" src="logo.png" style="float:left;height:183px;margin-left:30%;"/></a>
+		<?php
+		if($tipo_usuario == 1 || $tipo_usuario == 2) {
+			?> 
+			<a href="logout.php"><p style="float:left;margin-left:20px;">Cerrar sesión</p></a>
+			<?php
+		}
+		?>
+		<br/><br/><br/><br/><br/><br/><br/><br/>
+		<h1><div id="titulo" style="text-align:right;margin-right:2%;"></div></h1>
+	</div>
+</div>
+</div>
+<br/><br/><br/><br/><br/><br/>
 <?php 
-	echo $message;
+	echo "<p style=\"margin-left:30%;font-size:30px;\">$message</p>";
 ?>
-<form action="login.php"><p><input type="submit" value="Ok"/></p></form></h1>
+<form action="index.php"><p style="margin-left:30%;font-size:30px;"><input type="submit" value="Ok"/></p></form></h1>
 <?php menu_end();?>
 </body>
 </html>
