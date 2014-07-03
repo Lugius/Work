@@ -85,9 +85,6 @@ $(function(){
 		if($(this).val()==''){
 			$('#precio_origen').removeAttr('readonly');
 		}
-		else {
-			$('#precio_origen').attr('readonly',true);
-		}
 	});
     }
 });
@@ -440,14 +437,13 @@ $campos["lote"]=array(
 	"etiqueta"=>"Nombre de Lote",
 	"tipo"=>(($loteseleccionado==0) ? "seleccionar" : 'db'),
 	"tabla"=>"lotes",
-	"editable"=>false,
+	"editable"=>true,
 //	"no_tabla"=>true,
 	"busqueda"=>"=",
 //	"icono"=>"imagen",
 	"columna_texto"=>"nombre",
 	"columna_valor"=>"id",
 	"opcional"=>true,
-	"condicion"=>"GR>(select IFNULL(sum(GR),0) as suma_gr from productos where id=lotes.id and estado!=1) and estado=0",
 	"filtro"=>FILTRO_INT,
 	"default"=>(($loteseleccionado==0) ? VALOR_DB : $_GET['lote']),
 );
@@ -669,7 +665,6 @@ $campos["GR"]=array(
 	"etiqueta"=>"GR (Gramos)",
 	"tipo"=>"texto",
 	"editable"=>true,
-	"busqueda"=>'=',
 	"filtro"=>FILTRO_FLOAT,
 	"default"=>VALOR_DB,
 );
@@ -678,7 +673,6 @@ $campos["CT"]=array(
 	"etiqueta"=>"CT (Kilates)",
 	"tipo"=>"texto",
 	"editable"=>true,
-	"busqueda"=>'=',
 	"filtro"=>FILTRO_FLOAT,
 	"default"=>VALOR_DB,
 );
@@ -698,7 +692,6 @@ $campos["precio_origen"]=array(
 	"tipo"=>(($loteseleccionado==0) ? "texto" : 'db'),
 	"filtro"=>FILTRO_FLOAT,
 	"money"=>true,
-	"atributos"=>array("readonly"=>""),
 	"editable"=>true,
 	"default"=>(($loteseleccionado==0 || !$core->is_int2($_POST['numero']) || $_POST['numero']==0) ? VALOR_DB : round($rdlotes[0]['precio_origen']/$_POST['numero'],5))
 );
@@ -873,15 +866,6 @@ $campos["incremento_tipo"]=array(
 );
 
 
-$campos["precio_venta"]=array(
-	"etiqueta"=>"Precio de venta",
-	"tipo"=>"texto",
-	"editable"=>SIEMPRE,
-	"filtro"=>FILTRO_STRING,
-	"default"=>VALOR_DB,
-	"no_form"=>true,
-	"no_tabla"=>true,
-);
 if(isset($_GET['venta_id'])){
 	unset($campos["precio_venta"]);
 	class me_precio_venta {
@@ -898,6 +882,14 @@ if(isset($_GET['venta_id'])){
 		"callback"=>array(new me_precio_venta(),"get"),
 	);
 }
+
+$campos["precio_venta"]=array(
+	"etiqueta"=>"Precio de venta",
+	"tipo"=>"texto",
+	"editable"=>true,
+	"filtro"=>FILTRO_STRING,
+	"default"=>VALOR_DB,
+);
 
 $campos["gasto"]=array(
 	"etiqueta"=>"Gasto adicional",
@@ -932,10 +924,10 @@ if(!isset($editando))
 if(defined("COMPRA")){
 if($editando && $lista!='')
 	unset($campos["estado"]);
-$campos["incremento_tipo"]['no_tabla']=false;
-$campos["incremento"]['no_tabla']=false;
-$campos["incremento"]['editable']=SIEMPRE;
-$campos["incremento_tipo"]['editable']=SIEMPRE;
+$campos["incremento_tipo"]['no_tabla']=true;
+$campos["incremento"]['no_tabla']=true;
+$campos["incremento"]['editable']=true;
+$campos["incremento_tipo"]['editable']=true;
 $campos["amortizar"]['no_tabla']=true;
 $campos["codigobarras"]["editable"]=true;
 $campos["codigobarras"]["atributos"]=array("size"=>"40");
@@ -1008,7 +1000,7 @@ $forms2["amortizacion"]=array(
 				"fecha"=>array(
 					"tipo"=>"db",
 					"filtro"=>FILTRO_STRING,
-					"default"=>@date("m/d/y g:i:s a")
+					"default"=>date("Y-m-d H:i:s")
 					),
 				"enabled"=>array(
 					"tipo"=>"db",

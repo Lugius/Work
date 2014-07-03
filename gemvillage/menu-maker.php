@@ -113,7 +113,10 @@ function menu_start($tipo_usuario){
 			<?php
 			if($tipo_usuario == 1) {
 				?>
-				<li><a href="usuarios.php">USUARIOS</a>
+				<li><a href="javascript:void(0);">USUARIOS</a>
+				<ul>
+					<li><a class="radiustop radiusbottom" href="usuarios.php">Administrar usuarios</a></li>			
+				</ul>
 				<?php 
 			} 
 			?> 
@@ -124,6 +127,7 @@ function menu_start($tipo_usuario){
 					<li><a class="radiusbottom"  href="status_cliente.php">Status de cliente</a></li>
 				</ul>
 			<li><a  style="height:20px; background:#ccc;"href=""></a></li>
+			<li><a href="ganancias.php">INFORME DE VENTAS</a>
 			<li><a href="javascript:void(0);">VENTAS</a>
 				<ul>
 					<li><a class="radiustop"  href="tabla_nuevaventa.php">Administrar ventas</a></li>
@@ -140,6 +144,25 @@ function menu_start($tipo_usuario){
 			<li><a href="javascript:void(0);">ESTADOS DE PRODUCTO</a>
 				<ul>
 					<li><a class="radiustop radiusbottom" href="tabla_estadoproducto.php">Administrar estados de producto</a></li>
+				</ul>
+			</li>
+			<li><a  style="height:20px; background:#ccc;"href=""></a></li>
+			<li><a href="javascript:void(0);">MODULO GASTOS</a>
+				<ul>
+					<li><a class="radiustop" href="gastos.php">Administrar gastos</a></li>
+					<li><a class="radiusbottom" href="gastos_tipo.php">Tipos de gastos</a></li>
+				</ul>
+			</li>
+			<li><a href="javascript:void(0);">MODULO INGRESOS</a>
+				<ul>
+					<li><a class="radiustop" href="ingresos.php">Administrar ingresos</a></li>
+					<li><a class="radiusbottom" href="ingresos_tipo.php">Tipos de ingresos</a></li>
+				</ul>
+			</li>
+			<li><a href="javascript:void(0);">MODULO RETIROS</a>
+				<ul>
+					<li><a class="radiustop" href="retiros.php">Administrar retiros</a></li>
+					<li><a class="radiusbottom" href="retiros_tipo.php">Tipos de retiros</a></li>
 				</ul>
 			</li>
 			<li><a  style="height:20px; background:#ccc;"href=""></a></li>

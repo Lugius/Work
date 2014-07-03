@@ -1,0 +1,82 @@
+<?php
+@session_start();
+require_once('framework-master.php');
+require_once('db.php');
+require_once('menu-maker.php');
+?>
+<html>
+<head>
+<title>Tipo de gasto</title>
+<?php
+$core= new master($server,$database,$user,$password);
+$core->set_upload_dir("./images");
+$core->semilla="xianur0";
+echo $core->header();
+menu_header();
+?>
+</head>
+<body>
+<?php
+menu_start($tipo_usuario);
+$forms=array();
+$campos=array();
+$campos["nombre"]=array(
+	"etiqueta"=>"Nombre",
+	"tipo"=>"texto",
+	"busqueda"=>'like',
+	"editable"=>true,
+	"filtro"=>FILTRO_STRING,
+	"default"=>VALOR_DB,
+);
+$campos["descripcion"]=array(
+	"atributos"=>array(
+		"rows"=>4,
+		"cols"=>50,
+	),
+	"etiqueta"=>"Descripción",
+	"tipo"=>"area",
+	"editable"=>true,
+	"filtro"=>FILTRO_STRING,
+	"default"=>VALOR_DB,
+);
+$campos["icono"]=array(
+       "etiqueta"=>"Icono",
+       "tipo"=>"archivo",
+       "explorador"=>'multimedia.php',
+       "filtro"=>FILTRO_IMAGEN,
+       	"editable"=>true,
+       "default"=>VALOR_DB,
+);
+$campos["enviar"]=array(
+	"etiqueta"=>"Guardar",
+	"tipo"=>"enviar",
+	"filtro"=>FILTRO_STRING
+);
+
+$forms["gastos_tipo"]=array(
+		"negritas"=>TRUE,
+		"campos"=>$campos,
+);
+
+$core->createsqltable($forms);
+print $core->createtable(array(
+			"tabla"=>$forms,
+			"nuevo"=>array(
+				"boton"=>"nuevo.png",
+				"etiqueta"=>"Nuevo",
+				"formulario"=>$forms),
+			"editar"=>array(
+				"boton"=>"editar.png",
+				"etiqueta"=>"Editar",
+				"formulario"=>$forms),
+			"eliminar"=>array(
+				"boton"=>"eliminar.png",
+				'confirmacion'=>"¿Realmente desea eliminar este tipo de gasto?",
+				"etiqueta"=>"Eliminar",
+				"formulario"=>$forms)
+		)
+	);
+	menu_end();
+?>
+</body>
+</html>

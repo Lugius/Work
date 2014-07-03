@@ -101,8 +101,13 @@ menu_start($tipo_usuario);
 	}
 	$sql_load="SELECT venta_id, id FROM amortizacion where ".$condicion;
 	$ventas=$core->db_exect($sql_load);
-	echo '<a name="tabla"></a><div class="title-amortizacion"><h3>Tabla de amortización'.$display_adicional.'</h3><br /><div class="buscador_amortizacion" id="buscador_amortizacion">'.$buscador['label'].': '.$buscador['campo'].'</div><br /><br /><div style="width:70%;margin-left:10%;margin-right:20%;" class="m" id="m2"><table class="tablemaster" style="width:100%;"><thead><th>Nombre del producto</th><th>Código de Barras</th><th>Precio total</th><th>Precio de Venta</th><th>Socio</th><th>%</th><th>B. Socio</th><th>Amortización</th></thead>
-			<tbody>';
+	echo '<a name="tabla"></a><div class="title-amortizacion"><h3>Tabla de amortización'
+	.$display_adicional.'</h3><br /><div class="buscador_amortizacion" id="buscador_amortizacion">'
+	.$buscador['label'].': '.$buscador['campo'].'</div><br /><br />
+	<div style="width:70%;margin-left:10%;margin-right:20%;" class="m" id="m2">
+	<table class="tablemaster" style="width:100%;"><thead><th>Nombre del producto</th>
+	<th>Código de Barras</th><th>Precio total</th><th>Precio de Venta</th><th>Socio</th>
+	<th>%</th><th>B. Socio</th><th>Amortización</th></thead><tbody>';
 //	$subtotal=0;
 	$subtotal_1=0;
 	$suma_amortizacion=0;

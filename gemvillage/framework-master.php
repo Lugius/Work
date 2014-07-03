@@ -307,14 +307,18 @@ class master{
 		return $return;
 	}
 	public function header(){
-		return '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-			<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+		return '
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
 		<link rel="stylesheet" href="master.css" />
 		<link rel="stylesheet" href="adicional.css" />
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 		<script type="text/javascript" src="jquery.numeric.js"></script>
 		<script type="text/javascript" src="jquery.barcode.js"></script>
+
+
     <script type="text/javascript">
         function UpdateTableHeaders() {
             $("div.divTableWithFloatingHeader").each(function() {
@@ -341,8 +345,8 @@ class master{
                 }
             });
         }
-
         $(document).ready(function() {
+
             $(".tablemaster").each(function() {
                 $(this).wrap("<div class=\"divTableWithFloatingHeader\" style=\"position:relative;width:"+$("#m2").width()+"px;\"></div>");
 
@@ -375,6 +379,8 @@ class master{
 		filter_dates=function(){return [1,"cal_no_padding"];};
 		 $(function() {
 		$( ".datepicker" ).datepicker({ dateFormat: "dd/mm/yy", beforeShowDay: filter_dates});
+
+
 		$( "#dialog" ).dialog({
 			autoOpen: false,
 			modal: true,
@@ -656,7 +662,13 @@ class master{
 				}
 				else if($valor["tipo"] != 'enviar' && $valor["tipo"] != 'html_hidden' && $valor["tipo"]!='boton' && $valor['tipo']!='archivo'){
 					$campo=($valor['tipo']=='barcode' ? '<img src="barcode.php" class="pop" id="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'_barcodedisplay" width="250" /><br />' : '').
-					'<input'.$atributos.' type="'.(isset($this->tipos[$valor["tipo"]]) ? $this->tipos[$valor["tipo"]] : $valor["tipo"]).'" name="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'"  id="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'" value="'.((isset($db[$name]) && $valor["tipo"]!='archivo') ? $db[$name] : "").'" class="'.preg_replace("/\s+$/","",preg_replace("/^\s+/","",(($valor["tipo"] == 'fecha') ? 'datepicker' : "master_".$valor["tipo"]).(isset($valor['filtro']) ? ($valor['filtro']==FILTRO_INT ? " integer" : ($valor['filtro']==FILTRO_FLOAT ? " float" :'')) : '').($valor['tipo']=='barcode' ? " barcode" : ''))).'" />';
+					'<input'.$atributos.' type="'.(isset($this->tipos[$valor["tipo"]]) ? $this->tipos[$valor["tipo"]] : $valor["tipo"]).
+					'" name="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'"  id="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").
+					'" value="'.((isset($db[$name]) && $valor["tipo"]!='archivo') ? $db[$name] : "").
+					'" class="'.preg_replace("/\s+$/","",preg_replace("/^\s+/","",
+						(($valor["tipo"] == 'fecha') ? 'datepicker' : (($valor["tipo"] == 'semana') ? 'weekpicker' : "master_".$valor["tipo"])).
+						(isset($valor['filtro']) ? ($valor['filtro']==FILTRO_INT ? " integer" : ($valor['filtro']==FILTRO_FLOAT ? " float" :'')) : '').
+						($valor['tipo']=='barcode' ? " barcode" : ''))).'" />';
 				} else if($valor['tipo']=='archivo'){
 					$campo='<input type="file" name="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'" id="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'" style="display: none;" onchange="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'_seleccionar.value='.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'.value;">
 <input type="text" name="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'_seleccionar" style="width:50%;"><span class="ext-img "><a href="javascript:void(0);" onClick="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'.click();">Explorar</a></span>'.(($valor["tipo"]=='archivo' && isset($valor['explorador']) && $valor['explorador']!='') ?
@@ -671,6 +683,10 @@ class master{
 					$campo='<input'.$atributos.' class="btn" type="submit" value="'.htmlentities($valor['etiqueta'],ENT_QUOTES,"UTF-8").'" name="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'">';
  				else if($valor["tipo"] == 'boton')
 					$campo='<button'.$atributos.'>'.htmlentities($valor['etiqueta'],0,"UTF-8").'</button>';
+				else if($valor["tipo"]=='semana'){
+					$campo=($valor['tipo']=='barcode' ? '<img src="barcode.php" class="pop" id="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'_barcodedisplay" width="250" /><br />' : '').
+					'<input'.$atributos.' type="'.(isset($this->tipos[$valor["tipo"]]) ? $this->tipos[$valor["tipo"]] : $valor["tipo"]).'" name="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'"  id="'.htmlentities($name.$subfijo,ENT_QUOTES,"UTF-8").'" value="'.((isset($db[$name]) && $valor["tipo"]!='archivo') ? $db[$name] : "").'" class="'.preg_replace("/\s+$/","",preg_replace("/^\s+/","",(($valor["tipo"] == 'semana') ? 'weekpicker' : "master_".$valor["tipo"]).(isset($valor['filtro']) ? ($valor['filtro']==FILTRO_INT ? " integer" : ($valor['filtro']==FILTRO_FLOAT ? " float" :'')) : '').($valor['tipo']=='barcode' ? " barcode" : ''))).'" />';
+				};
 				return array("campo"=>$campo,"label"=>$label);
 	}
 	
