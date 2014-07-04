@@ -110,6 +110,7 @@ if($tipo_usuario == 1){
 		"tipo"=>"fecha",
 		"filtro"=>FILTRO_STRING,
 		"default"=>VALOR_DB,
+		"default"=>date("Y-m-d H:i:s")
 	);
 
 	$campos["notas"]=array(

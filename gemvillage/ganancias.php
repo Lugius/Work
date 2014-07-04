@@ -33,7 +33,7 @@ $(function() {
     $('.month-picker').datepicker( {
         changeMonth: true,
         changeYear: true,
-        dateFormat: 'mm/yy',
+        dateFormat: 'yy-mm',
         showButtonPanel: true,
         closeText: 'Filtrar',
         onClose: function(dateText, inst){
@@ -43,7 +43,7 @@ $(function() {
             	month = '0' + month;
             }
             $(this).datepicker('setDate', new Date(year, month, 1));
-            document.location='?'+"<?php echo $_POST['filtro'] ?>"+'='+month+"/"+year;
+            document.location='?'+"<?php echo $_POST['filtro'] ?>"+'='+year+"-"+month;
         }
     });
 });
@@ -71,7 +71,7 @@ $(function() {
     }
     
     $('.week-picker').datepicker( {
-    	dateFormat: 'dd/mm/yy',
+    	dateFormat: 'yy-mm-dd',
         showOtherMonths: true,
         selectOtherMonths: true,
         onSelect: function(dateText, inst) { 
@@ -156,6 +156,7 @@ menu_start($tipo_usuario);
 	$condicion="";
 	$display_adicional=" ";
 	$sql_load="SELECT venta_id, id FROM amortizacion";
+	$filtro="Ninguno";
 	if(isset($_GET['none'])){
 		$condicion="";
 		$sql_load="SELECT venta_id, id FROM amortizacion";
@@ -167,6 +168,7 @@ menu_start($tipo_usuario);
 				   	  ON productos.id = cid
 				   WHERE codigobarras='".$_GET['codigo']."'";
 		$extra3="";
+		$filtro="Codigo de barras: ".$_GET['codigo'];
 	} elseif(isset($_GET['nombre'])){
 		$extra="and nombre='".$_GET['nombre']."'";
 		$extra2=" INNER JOIN amortizacion_cid_multiple
@@ -175,6 +177,7 @@ menu_start($tipo_usuario);
 				   	  ON productos.id = cid
 				   WHERE nombre='".$_GET['nombre']."'";
 		$extra3="";
+		$filtro="Nombre de producto: ".$_GET['nombre'];
 	} elseif(isset($_GET['lote'])){
 		$extra="and lote='".$_GET['lote']."'";
 		$extra2=" INNER JOIN amortizacion_cid_multiple
@@ -183,28 +186,33 @@ menu_start($tipo_usuario);
 				   	  ON productos.id = cid
 				   WHERE lote='".$_GET['lote']."'";
 		$extra3="";
+		$filtro="Lote: ".$_GET['lote'];
 	} elseif(isset($_GET['diario'])){
-		$partes_fecha=explode("/",$_GET['diario']);
+		$partes_fecha=explode("-",$_GET['diario']);
 		$extra="";
-		$extra2="WHERE fecha LIKE '".$partes_fecha[2]."-".$partes_fecha[1]."-".$partes_fecha[0]." %'";
-		$extra3=" WHERE fecha LIKE '".$partes_fecha[0]."/".$partes_fecha[1]."/".$partes_fecha[2]."%'";
+		$extra2=" WHERE fecha LIKE '".$partes_fecha[0]."-".$partes_fecha[1]."-".$partes_fecha[2]."%'";
+		$extra3=$extra2;
+		$filtro="Dia: ".$partes_fecha[0]."-".$partes_fecha[1]."-".$partes_fecha[2];
 	} elseif(isset($_GET['semanal'])){
 		$partes_semana=explode(" to ",$_GET['semanal']);
-		$partes_fechas1=explode("/",$partes_semana[0]);
-		$partes_fechas2=explode("/",$partes_semana[1]);
+		$partes_fechas1=explode("-",$partes_semana[0]);
+		$partes_fechas2=explode("-",$partes_semana[1]);
 		$extra="";
-		$extra2="WHERE (fecha BETWEEN '".$partes_fechas1[2]."-".$partes_fechas1[1]."-".$partes_fechas1[0]." %' AND '".$partes_fechas2[2]."-".$partes_fechas2[1]."-".$partes_fechas2[0]." %')";
-		$extra3="WHERE (fecha between '".$partes_fechas1[0]."/".$partes_fechas1[1]."/".$partes_fechas1[2]." %' AND '".$partes_fechas2[0]."/".$partes_fechas2[1]."/".$partes_fechas2[2]."%')";
+		$extra2=" WHERE (fecha BETWEEN '".$partes_fechas1[0]."-".$partes_fechas1[1]."-".($partes_fechas1[2]-1)."%' AND '".$partes_fechas2[0]."-".$partes_fechas2[1]."-".$partes_fechas2[2]."%')";
+		$extra3=$extra2;
+		$filtro="Semana: ".$partes_fechas1[0]."-".$partes_fechas1[1]."-".$partes_fechas1[2]." a ".$partes_fechas2[0]."-".$partes_fechas2[1]."-".$partes_fechas2[2];
 	} elseif(isset($_GET['mensual'])){
-		$partes_fecha=explode("/",$_GET['mensual']);
+		$partes_fecha=explode("-",$_GET['mensual']);
 		$extra="";
-		$extra2="WHERE fecha LIKE '".$partes_fecha[1]."-".$partes_fecha[0]."-%'";
-		$extra3=" WHERE fecha LIKE '%/".$partes_fecha[0]."/".$partes_fecha[1]."%'";
+		$extra2=" WHERE fecha LIKE '".$partes_fecha[0]."-".$partes_fecha[1]."-%'";
+		$extra3=$extra2;
+		$filtro="Mes: ".$partes_fecha[0]."-".$partes_fecha[1];
 	} elseif(isset($_GET['anual'])){
 		$partes_fecha=$_GET['anual'];
 		$extra="";
-		$extra2="WHERE fecha LIKE '".$partes_fecha."-%'";
-		$extra3=" WHERE fecha LIKE '%/".$partes_fecha."'";
+		$extra2=" WHERE fecha LIKE '".$partes_fecha."-%'";
+		$extra3=$extra2;
+		$filtro="A&ntilde;o: ".$partes_fecha;
 	}
 	$sql_load="SELECT venta_id, amortizacion.id
 			   FROM amortizacion ".
@@ -212,7 +220,7 @@ menu_start($tipo_usuario);
 	$ventas=$core->db_exect($sql_load);
 	echo '<a name="tabla"></a><div class="title-amortizacion"><h3>INFORME DE GANANCIAS Y VENTAS'.
 		$display_adicional.'</h3><br />'.
-		'<p style="text-align:left;margin-left:20%;">Filtrar por:</p>
+		'<p style="text-align:left;margin-left:20%;"><b>Filtrar por:</b></p>
 		<form id="filter" action="" method="post">
 			<select name="filtro" style="width: 300px;float:left;margin-left:20%;">
 			  <option value="none" selected>Seleccionar filtro</option>
@@ -284,7 +292,8 @@ menu_start($tipo_usuario);
 </script>
 
 <?php
-	echo $buscador['label'].' '.$buscador['campo'].'</div><br/><br/>
+	echo $buscador['label'].' '.$buscador['campo'].'</div>
+		<h4 style="text-align:left;margin-left:15%"><b>Filtro: <br/>'.$filtro.'</b></h4>
 		<div style="width:70%;margin-left:10%;clear:both;margin-right:20%;margin-top:40px;" class="m" id="m2">
 		<table class="tablemaster" style="width:100%;"><thead>
 		<th>Nombre del producto</th>
@@ -324,6 +333,8 @@ menu_start($tipo_usuario);
 			foreach($gastos as $gasto){
 				$sumar+=round((floatval($product['precio_origen'])/100)*floatval($gasto['aumento']),2);
 			}
+			if(isset($fecha_venta[$i_p]['fecha']))
+				$fecha_temp=$fecha_venta[$i_p]['fecha'];
 //			$vals_socios=array_pop($core->db_exect("SELECT (select nombre from socios where id=productos.socio) as socio_nombre,beneficios FROM lotes where id='".$product['lote']."';"));
 			$prec_total=floatval(floatval($product['precio_origen'])+$sumar);
 			$suma_amortizacion+=floatval($amortizacion);
@@ -334,7 +345,7 @@ menu_start($tipo_usuario);
 			print "<tr><td>".
 			$product['nombre']."</td><td>".
 			$product['codigobarras']."</td><td>".
-			$fecha_venta[$i_p]['fecha']."</td><td>".
+			$fecha_temp."</td><td>".
 			$prec_total."</td><td>".
 			$precios_venta[$i_p]['precio_venta']."</td><td>".
 			$ingreso_ganancia."</td><td>".
@@ -346,27 +357,26 @@ menu_start($tipo_usuario);
 			$ing_ganancia+=$ingreso_ganancia;
 		}
 	}
-	print_r($extra3);
 	$gastos_extra=$core->db_exect("SELECT cantidad FROM gastos".$extra3);
-	foreach($gastos_extra as $ig=>$gastos){
+	foreach($gastos_extra as $gastos){
 		foreach($gastos as $iig){
 			$gastos_totales += floatval($iig);
 		}
 	}
 	$ingresos_extra=$core->db_exect("SELECT cantidad FROM ingresos".$extra3);
-	foreach($ingresos_extra as $ig=>$ingresos){
+	foreach($ingresos_extra as $ingresos){
 		foreach($ingresos as $iig){
 			$ingresos_totales += floatval($iig);
 		}
 	}
 	$retiros_extra=$core->db_exect("SELECT cantidad FROM retiros".$extra3);
-	foreach($retiros_extra as $ig=>$retiros){
+	foreach($retiros_extra as $retiros){
 		foreach($retiros as $iig){
 			$retiros_totales += floatval($iig);
 		}
 	}
-	$disponible_gen=($ing_neto+$ingresos_totales)-$gastos_totales;
-	$disponible_gan=($ing_ganancia+$ingresos_totales)-$gastos_totales;
+	$disponible_gen=($ing_neto+$ingresos_totales)-$gastos_totales-$retiros_totales;
+	$disponible_gan=($ing_ganancia+$ingresos_totales)-$gastos_totales-$retiros_totales;
 	print '<tr><td><b>TOTALES:</td><td></td><td></td><td>'.$suma_total.'</td><td>'.$suma_total_venta.'</td><td>'.$ing_ganancia.'</td></b>'
 	?>
 	</tbody>
@@ -379,9 +389,9 @@ menu_start($tipo_usuario);
 		print "<b>Ingreso ganancia: </b>".money_format('%n', $ing_ganancia)."<br /><br />";
 		print "<b>Gastos adicionales: </b>".money_format('%n', $gastos_totales)."<br /><br />";
 		print "<b>ingresos adicionales: </b>".money_format('%n', $ingresos_totales)."<br /><br />";
+		print "<b>Retiros totales: </b>".money_format('%n', $retiros_totales)."<br /><br />";
 		print "<b>Disponible general: </b>".money_format('%n', $disponible_gen)."<br /><br />";
 		print "<b>Disponible ganancias: </b>".money_format('%n', $disponible_gan)."<br /><br />";
-		print "<b>Retiros totales: </b>".money_format('%n', $retiros_totales)."<br /><br />";
 	?>
 	</span>
 <input type="button" class="btn float-l" value="Imprimir" onClick="imprimir(this);" />

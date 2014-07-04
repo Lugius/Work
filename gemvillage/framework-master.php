@@ -378,7 +378,7 @@ class master{
 		<script>
 		filter_dates=function(){return [1,"cal_no_padding"];};
 		 $(function() {
-		$( ".datepicker" ).datepicker({ dateFormat: "dd/mm/yy", beforeShowDay: filter_dates});
+		$( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd", beforeShowDay: filter_dates});
 
 
 		$( "#dialog" ).dialog({

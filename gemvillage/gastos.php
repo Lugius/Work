@@ -61,6 +61,7 @@ $campos["fecha"]=array(
 	"busqueda"=>'like',
 	"filtro"=>FILTRO_STRING,
 	"default"=>VALOR_DB,
+	"default"=>date("Y-m-d H:i:s")
 );
 
 $campos["notas"]=array(
