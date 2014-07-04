@@ -40,11 +40,11 @@ class master{
 		}
 		$this->db=mysql_connect($server, $user,$password);
 		if(!$this->db){
-			$this->error("Error conectando con base de datos!");
+			header( 'Location: instalacion_db.php' ) ;
 			exit;
 		}
 		if (!mysql_select_db($database)) {
-			$this->error("Error seleccionando base de datos: ".mysql_error());
+			header( 'Location: instalacion_db.php' ) ;
 			exit;
 		}
 	}
@@ -1520,10 +1520,6 @@ class master{
 				if (!$resdb) {
 					$this->error("Error de base de datos: ".mysql_error($this->db));
 					return false;
-				}
-				if (mysql_num_rows($resdb) == 0) {
-					$this->error("Error de base de datos! 502: SELECT id FROM ".$table_name." where ".$condiciones.";");
-				    return false;
 				}
 				while ($fila = mysql_fetch_assoc($resdb)) {
 					$datos[]=$fila;

@@ -252,7 +252,7 @@ menu_start($tipo_usuario);
 			$prec_total=floatval(floatval($product['precio_origen'])+$sumar);
 			$ingreso_ganancia = floatval($precios_venta[$i_p]['precio_venta']) - $prec_total;
 			$fechaSemanaAnterior=date("Y-m-d",strtotime("-1 week"));
-			$fechaHoy=date("Y-m-d");
+			$fechaHoy=date("Y-m-d",strtotime("+1 day"));
 			if(isset($fecha_venta[$i_p]['fecha']))
 				$fecha_temp=$fecha_venta[$i_p]['fecha'];
 			if($fecha_temp <= $fechaHoy && $fecha_temp >= $fechaSemanaAnterior){
