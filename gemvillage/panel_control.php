@@ -5,7 +5,7 @@ require_once('db.php');
 require_once('menu-maker.php');
 ?><html>
 <head>
-<title>Amortización</title>
+<title>Panel de control</title>
 <script src="Chart.min.js"></script>
 <?php
 $core= new master($server,$database,$user,$password);

@@ -147,19 +147,19 @@ function menu_start($tipo_usuario){
 				</ul>
 			</li>
 			<li><a  style="height:20px; background:#ccc;"href=""></a></li>
-			<li><a href="javascript:void(0);">MODULO GASTOS</a>
+			<li><a href="javascript:void(0);">GASTOS</a>
 				<ul>
 					<li><a class="radiustop" href="gastos.php">Administrar gastos</a></li>
 					<li><a class="radiusbottom" href="gastos_tipo.php">Tipos de gastos</a></li>
 				</ul>
 			</li>
-			<li><a href="javascript:void(0);">MODULO INGRESOS</a>
+			<li><a href="javascript:void(0);">INGRESOS</a>
 				<ul>
 					<li><a class="radiustop" href="ingresos.php">Administrar ingresos</a></li>
 					<li><a class="radiusbottom" href="ingresos_tipo.php">Tipos de ingresos</a></li>
 				</ul>
 			</li>
-			<li><a href="javascript:void(0);">MODULO RETIROS</a>
+			<li><a href="javascript:void(0);">RETIROS</a>
 				<ul>
 					<li><a class="radiustop" href="retiros.php">Administrar retiros</a></li>
 					<li><a class="radiusbottom" href="retiros_tipo.php">Tipos de retiros</a></li>

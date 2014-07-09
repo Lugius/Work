@@ -1,6 +1,6 @@
 <?php
 $server="localhost";
-$database="Minpv09877";
+$database="Minpv09876";
 $user="root";
 $password="Loscocos123";
 ?>
