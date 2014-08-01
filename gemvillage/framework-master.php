@@ -1,4 +1,7 @@
 <?php
+error_reporting(0);
+ini_set('display_errors', false);
+ini_set('display_startup_errors', false);
 if(isset($_REQUEST['guardar_tabla'])){
 	$GLOBALS['guardar_tabla']='guardar_tabla';
 }
@@ -38,7 +41,7 @@ class master{
 			$this->error("Por favor agrega session_start() al inicio de tu archivo.");
 			exit;
 		}
-		$this->db=mysql_connect($server, $user,$password);
+		$this->db=mysql_connect($server, $user, $password);
 		if(!$this->db){
 			header( 'Location: instalacion_db.php' ) ;
 			exit;
@@ -378,7 +381,7 @@ class master{
 		<script>
 		filter_dates=function(){return [1,"cal_no_padding"];};
 		 $(function() {
-		$( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd", beforeShowDay: filter_dates});
+		$( ".datepicker" ).datepicker({ dateFormat: "y-mm-dd", beforeShowDay: filter_dates});
 
 
 		$( "#dialog" ).dialog({

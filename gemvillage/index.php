@@ -5,9 +5,8 @@ require_once('db.php');
 if(isset($_SESSION['id_usuario'])){
 	header( 'Location: panel_control.php' ) ;
 }
-?><html>
-<head>
-<title>Index</title>
+?>
+
 <?php
 $core= new master($server,$database,$user,$password);
 $core->set_upload_dir("./images");
@@ -16,6 +15,9 @@ echo $core->header();
 require_once('menu-maker.php');
 $tipo_usuario = check_tipo_usuario($server, $database, $user, $password);
 ?>
+<html>
+<head>
+<title>Index</title>
 <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.0/build/reset/reset-min.css">
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all" charset="utf-8" />
 <link rel="stylesheet" href="css/MenuMatic.css" type="text/css" media="screen" charset="utf-8" />

@@ -80,3 +80,12 @@ input.focus {
 #login {
 	text-align: left;
 }
+
+.w-30{
+  width: 32%;
+  float: left;
+}
+ /*picker dates*/
+ .ui-datepicker-inline.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all{
+  float: right;
+ }

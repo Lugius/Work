@@ -2,7 +2,7 @@
 @session_start();
 require_once('framework-master.php');
 require_once('db.php');
-require_once('menu-maker.php');
+require_once('menu-maker2.php');
 ?><html>
 <head>
 <title>Gastos</title>
@@ -59,9 +59,9 @@ $campos["fecha"]=array(
 	"etiqueta"=>"Fecha del gasto",
 	"tipo"=>"fecha",
 	"busqueda"=>'like',
+	"editable"=>true,
 	"filtro"=>FILTRO_STRING,
-	"default"=>VALOR_DB,
-	"default"=>date("Y-m-d H:i:s")
+	"default"=>(($loteseleccionado==0) ? VALOR_DB : date("y-m-d H:i:s"))
 );
 
 $campos["notas"]=array(

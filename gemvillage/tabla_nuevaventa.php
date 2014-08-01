@@ -38,8 +38,8 @@ $campos=array();
 $campos["fecha"]=array(
         "tipo"=>"db",
         "filtro"=>FILTRO_STRING,
-	"busqueda"=>'=',
-        "default"=>date("Y-m-d H:i:s"),
+		"busqueda"=>'=',
+        "default"=>date("m/d/y H:i:s"),
         "max"=>21
 );
 $campos["cliente"]=array(

@@ -1000,7 +1000,7 @@ $forms2["amortizacion"]=array(
 				"fecha"=>array(
 					"tipo"=>"db",
 					"filtro"=>FILTRO_STRING,
-					"default"=>date("Y-m-d H:i:s")
+					"default"=>date("m/d/y H:i:s")
 					),
 				"enabled"=>array(
 					"tipo"=>"db",

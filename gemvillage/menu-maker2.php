@@ -71,58 +71,37 @@ function menu_start($tipo_usuario){
 	
 	    <ul id="nav">
 
-			<li><a class="radiustop" href="panel_control.php">PANEL DE CONTROL</a></li>
-			<li><a href="javascript:void(0);">PRODUCTOS</a> 
-		
+			<li><a class="radiustop" href="ganancias.php">PANEL DE CONTROL</a></li>
+			<li><a href="informes.php">INFORMES</a></li>
+			<li><a href="javascript:void(0);">GASTOS</a>
 				<ul>
-					<li><a class="radiustop" href="tabla_productos.php">Administrar productos</a></li>
-					<li><a href="categorias.php">Categorías</a></li>
-					<li><a href="tabla_tipocategoria.php">Tipos de categorías</a></li>
-					<li><a href="tabla_gastos.php">Gastos adicionales</a></li>
-					<li><a class="radiusbottom"  href="tipopiedra.php">Tipos de piedra</a></li>
+					<li><a class="radiustop" href="gastos.php">Administrar gastos</a></li>
+					<li><a class="radiusbottom" href="gastos_tipo.php">Tipos de gastos</a></li>
 				</ul>
 			</li>
-		
-			<li><a href="javascript:void(0);">LOTES</a>
+			<li><a href="javascript:void(0);">INGRESOS</a>
 				<ul>
-					<li><a class="radiustop radiusbottom" href="tabla_lotes.php">Administrar lotes</a></li>
+					<li><a class="radiustop" href="ingresos.php">Administrar ingresos</a></li>
+					<li><a class="radiusbottom" href="ingresos_tipo.php">Tipos de ingresos</a></li>
 				</ul>
 			</li>
-			<li><a href="javascript:void(0);">PROVEEDORES</a>
+			<li><a href="javascript:void(0);">RETIROS</a>
 				<ul>
-					<li><a class="radiustop radiusbottom" href="tabla_proveedor.php">Administrar proveedores</a></li>			
+					<li><a class="radiustop" href="retiros.php">Administrar retiros</a></li>
+					<li><a class="radiusbottom" href="retiros_tipo.php">Tipos de retiros</a></li>
 				</ul>
 			</li>
-			<li><a href="javascript:void(0);">SOCIOS</a>
+			<?php
+			if($tipo_usuario == 1) {
+				?>
+				<li><a href="javascript:void(0);">USUARIOS</a>
 				<ul>
-					<li><a class="radiustop radiusbottom" href="tabla_socio.php">Administrar socios</a></li>			
+					<li><a class="radiustop radiusbottom" href="usuarios.php">Administrar usuarios</a></li>			
 				</ul>
-			</li>
-			<li><a href="javascript:void(0);">CLIENTES</a>
-				<ul>
-					<li><a class="radiustop" href="tabla_cliente.php">Administrar clientes</a></li>
-					<li><a href="nuevo_tipocliente.php">Tipos de cliente</a></li>
-					<li><a class="radiusbottom"  href="status_cliente.php">Status de cliente</a></li>
-				</ul>
-			<li><a href="javascript:void(0);">VENTAS</a>
-				<ul>
-					<li><a class="radiustop"  href="tabla_nuevaventa.php">Administrar ventas</a></li>
-					<li><a  href="venta_by_producto.php">Productos vendidos</a></li>
-					<li><a  href="tabla_tipoestadoventa.php">Estados de venta</a></li>
-					<li><a class="radiusbottom" href="tabla_tipoventa.php">Tipos de venta</a></li>
-				</ul>
-			</li>
-			<li><a href="javascript:void(0);">COMPRAS</a>
-				<ul>
-					<li><a class="radiustop radiusbottom" href="tabla_nuevotipocompra.php">Administrar tipos de compra</a></li>
-				</ul>
-			<li><a href="javascript:void(0);">ESTADOS DE PRODUCTO</a>
-				<ul>
-					<li><a class="radiustop radiusbottom" href="tabla_estadoproducto.php">Administrar estados de producto</a></li>
-				</ul>
-			</li>
-			<li><a href="multimedia.php">MULTIMEDIA</a></li>
-			<li><a href="ganancias.php">ADMINISTRACIÓN</a>
+				<?php 
+			} 
+			?>
+			<li><a href="panel_control.php">PUNTO DE VENTA</a></li>
 			<li><a class="radiusbottom" href="logout.php">CERRAR SESSIÓN</a></li>
     </div>
 </div>
